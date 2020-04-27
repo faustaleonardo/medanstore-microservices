@@ -15,12 +15,15 @@ const acceptedFields = [
 ];
 
 const sendEmail = async (token, user, orderId, url) => {
-  await axios.post('http://localhost:5007/payment-reminder/send', {
-    token,
-    user,
-    orderId,
-    url,
-  });
+  await axios.post(
+    'http://35.185.178.158/email-service/payment-reminder/send',
+    {
+      token,
+      user,
+      orderId,
+      url,
+    }
+  );
 };
 
 exports.getPayments = async (ctx) => {
