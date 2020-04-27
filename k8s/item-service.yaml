@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: item-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: item-service
+  template:
+    metadata:
+      labels:
+        component: item-service
+    spec:
+      containers:
+        - name: item-service
+          image: faustaleonardo/medanstore-item-service
+          ports:
+            - containerPort: 5003
+          env:
+            - name: PG_USERNAME
+              value: postgres
+            - name: PG_HOST
+              value: db-instance-pg-medanhost.c5z41jrlcefd.ap-southeast-1.rds.amazonaws.com
+            - name: PG_PORT
+              value: '5432'
+            - name: PG_DATABASE
+              value: medanstore_microservice_items
+            - name: DIALECT
+              value: postgres
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: item-service-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: item-service
+  ports:
+    - port: 5003
+      targetPort: 5003

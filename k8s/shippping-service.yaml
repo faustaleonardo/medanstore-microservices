@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: shipping-service
+  template:
+    metadata:
+      labels:
+        component: shipping-service
+    spec:
+      containers:
+        - name: shipping-service
+          image: faustaleonardo/medanstore-shipping-service
+          ports:
+            - containerPort: 5008
+          env:
+            - name: RAJA_ONGKIR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rajaongkirapikey
+                  key: RAJA_ONGKIR_API_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shipping-service-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: shipping-service
+  ports:
+    - port: 5008
+      targetPort: 5008

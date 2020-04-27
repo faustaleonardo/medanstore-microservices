@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "@koa/router": "^8.0.8",
+    "dotenv": "^8.2.0",
+    "html-to-text": "^5.1.1",
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
+    "koa-logger": "^3.2.1",
+    "nodemailer": "^6.4.6",
+    "nodemailer-sendgrid": "^1.0.3",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "name": "email-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

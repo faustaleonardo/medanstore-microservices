@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: picture-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: picture-service
+  template:
+    metadata:
+      labels:
+        component: picture-service
+    spec:
+      containers:
+        - name: picture-service
+          image: faustaleonardo/medanstore-picture-service
+          ports:
+            - containerPort: 5004
+          env:
+            - name: PG_USERNAME
+              value: postgres
+            - name: PG_HOST
+              value: db-instance-pg-medanhost.c5z41jrlcefd.ap-southeast-1.rds.amazonaws.com
+            - name: PG_PORT
+              value: '5432'
+            - name: PG_DATABASE
+              value: medanstore_microservice_pictures
+            - name: DIALECT
+              value: postgres
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
+            - name: S3_BUCKET
+              value: medan-store-microservices
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: awsaccesskeyid
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: awssecretaccesskey
+                  key: AWS_SECRET_ACCESS_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: picture-service-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: picture-service
+  ports:
+    - port: 5004
+      targetPort: 5004

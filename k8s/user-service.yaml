@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: user-service
+  template:
+    metadata:
+      labels:
+        component: user-service
+    spec:
+      containers:
+        - name: user-service
+          image: faustaleonardo/medanstore-user-service
+          ports:
+            - containerPort: 5001
+          env:
+            - name: PG_USERNAME
+              value: postgres
+            - name: PG_HOST
+              value: db-instance-pg-medanhost.c5z41jrlcefd.ap-southeast-1.rds.amazonaws.com
+            - name: PG_PORT
+              value: '5432'
+            - name: PG_DATABASE
+              value: medanstore_microservice_users
+            - name: DIALECT
+              value: postgres
+            - name: JWT_EXPIRES_IN
+              value: 90d
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
+            - name: JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwtsecretkey
+                  key: JWT_SECRET_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: user-service
+  ports:
+    - port: 5001
+      targetPort: 5001

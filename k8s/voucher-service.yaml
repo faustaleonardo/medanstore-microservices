@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voucher-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: voucher-service
+  template:
+    metadata:
+      labels:
+        component: voucher-service
+    spec:
+      containers:
+        - name: voucher-service
+          image: faustaleonardo/medanstore-voucher-service
+          ports:
+            - containerPort: 5009
+          env:
+            - name: PG_USERNAME
+              value: postgres
+            - name: PG_HOST
+              value: db-instance-pg-medanhost.c5z41jrlcefd.ap-southeast-1.rds.amazonaws.com
+            - name: PG_PORT
+              value: '5432'
+            - name: PG_DATABASE
+              value: medanstore_microservice_vouchers
+            - name: DIALECT
+              value: postgres
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: voucher-service-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: voucher-service
+  ports:
+    - port: 5009
+      targetPort: 5009

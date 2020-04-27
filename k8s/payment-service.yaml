@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: payment-service
+  template:
+    metadata:
+      labels:
+        component: payment-service
+    spec:
+      containers:
+        - name: payment-service
+          image: faustaleonardo/medanstore-payment-service
+          ports:
+            - containerPort: 5006
+          env:
+            - name: PG_USERNAME
+              value: postgres
+            - name: PG_HOST
+              value: db-instance-pg-medanhost.c5z41jrlcefd.ap-southeast-1.rds.amazonaws.com
+            - name: PG_PORT
+              value: '5432'
+            - name: PG_DATABASE
+              value: medanstore_microservice_payments
+            - name: DIALECT
+              value: postgres
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
+            - name: STRIPE_PUBLISHABLE_KEY
+              value: pk_test_qk9AekFqbYfpDfPjfbYuBHNZ
+            - name: STRIPE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: stripesecretkey
+                  key: STRIPE_SECRET_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: payment-service
+  ports:
+    - port: 5006
+      targetPort: 5006

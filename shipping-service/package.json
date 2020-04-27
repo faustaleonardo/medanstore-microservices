@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@koa/router": "^8.0.8",
+    "dotenv": "^8.2.0",
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
+    "koa-logger": "^3.2.1",
+    "rajaongkir-nodejs": "^0.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "name": "shipping-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

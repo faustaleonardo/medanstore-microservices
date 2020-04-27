@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: web
+          image: faustaleonardo/medanstore-web
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_PUBLISHABLE_KEY
+              value: pk_test_qk9AekFqbYfpDfPjfbYuBHNZ
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: web
+  ports:
+    - port: 3000
+      targetPort: 3000
