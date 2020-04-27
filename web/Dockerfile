@@ -1,18 +1,17 @@
-FROM node:alpine as builder
+FROM tiangolo/node-frontend:10 as build-stage
 
-WORKDIR "/app"
+WORKDIR /app
 
-COPY ./package.json .
+COPY package*.json /app/
 
 RUN npm install
 
-COPY . .
+COPY ./ /app/
 
 RUN npm run build
 
 FROM nginx
 
-EXPOSE 3000
+COPY --from=build-stage /app/build/ /usr/share/nginx/html
 
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
