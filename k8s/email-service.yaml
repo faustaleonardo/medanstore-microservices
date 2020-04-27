@@ -34,6 +34,11 @@ spec:
                 secretKeyRef:
                   name: sendgridpassword
                   key: SENDGRID_PASSWORD
+            - name: JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwtsecretkey
+                  key: JWT_SECRET_KEY
 
 ---
 apiVersion: v1
