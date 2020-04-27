@@ -8,14 +8,15 @@ const {
   deleteCategory,
 } = require('../controllers/categoryController');
 
+const { requireLogin, requireAdmin } = require('../middlewares/require');
+
 const router = new Router();
 
 router.get('/', getCategories);
 router.get('/:id', getCategory);
 
-// protected by auth and has to be admin
-router.post('/', createCategory);
-router.patch('/:id', updateCategory);
-router.delete('/:id', deleteCategory);
+router.post('/', requireLogin, requireAdmin, createCategory);
+router.patch('/:id', requireLogin, requireAdmin, updateCategory);
+router.delete('/:id', requireLogin, requireAdmin, deleteCategory);
 
 module.exports = router;
