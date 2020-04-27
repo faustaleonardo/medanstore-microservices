@@ -16,7 +16,7 @@ spec:
         - name: web
           image: faustaleonardo/medanstore-web
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           env:
             - name: REACT_APP_PUBLISHABLE_KEY
               value: pk_test_qk9AekFqbYfpDfPjfbYuBHNZ
@@ -31,5 +31,5 @@ spec:
   selector:
     component: web
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 80
+      targetPort: 80
