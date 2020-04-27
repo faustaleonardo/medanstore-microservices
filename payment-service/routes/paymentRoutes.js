@@ -8,13 +8,14 @@ const {
   updatePayment,
 } = require('../controllers/paymentController');
 
+const { requireLogin } = require('../middlewares/require');
+
 const router = new Router();
 
-// protected and has to be user
-router.get('/', getPayments);
-router.get('/:id', getPayment);
-router.post('/:orderId', createPayment);
-router.patch('/:orderId/stripe', finishPayment);
-router.patch('/:orderId', updatePayment);
+router.get('/', requireLogin, getPayments);
+router.get('/:id', requireLogin, getPayment);
+router.post('/:orderId', requireLogin, createPayment);
+router.patch('/:orderId/stripe', requireLogin, finishPayment);
+router.patch('/:orderId', requireLogin, updatePayment);
 
 module.exports = router;

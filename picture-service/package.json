@@ -5,6 +5,7 @@
     "aws-sdk": "^2.662.0",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "koa-logger": "^3.2.1",

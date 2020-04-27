@@ -14,26 +14,17 @@ const acceptedFields = [
   'finalPrice',
 ];
 
-// PENDING
-const getAuthUserId = () => {
-  return 1;
-};
-
-// CHECK LATER
-const sendEmail = async (user, orderId, url) => {
-  // PENDING. Hard coded, later change.
-  await axios.post(
-    'http://35.185.178.158/email-service/payment-reminder/send',
-    {
-      user,
-      orderId,
-      url,
-    }
-  );
+const sendEmail = async (token, user, orderId, url) => {
+  await axios.post('http://localhost:5007/payment-reminder/send', {
+    token,
+    user,
+    orderId,
+    url,
+  });
 };
 
 exports.getPayments = async (ctx) => {
-  const userId = getAuthUserId();
+  const userId = ctx.state.user;
   const { page } = ctx.query;
 
   const payments = await models.Payment.findAll({
@@ -62,7 +53,8 @@ exports.createPayment = async (ctx) => {
 
   const filteredBody = filterFields(ctx.request.body, acceptedFields);
 
-  const userId = getAuthUserId();
+  const user = ctx.state.user;
+  const userId = user.id;
   const expiredTime = getExpiredTime();
 
   const data = { ...filteredBody, orderId, userId, expiredTime };
@@ -76,11 +68,7 @@ exports.createPayment = async (ctx) => {
 
   const url = `${ctx.protocol}://${host}/orders`;
 
-  // PENDING. Hardcoded, later change to user
-  const user = { username: 'ursula67', email: 'faustaleonardo11@gmail.com' };
-
-  // not blocking
-  sendEmail(user, orderId, url);
+  await sendEmail(ctx.state.token, user, orderId, url);
 
   sendSuccessResponse(ctx, payment);
 };

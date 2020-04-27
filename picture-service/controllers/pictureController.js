@@ -9,12 +9,9 @@ const S3 = new AWS.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-// CHECK LATER
 const getItemAssociated = async (itemId) => {
   try {
-    const { data } = await axios.get(
-      `http://35.185.178.158/item-service/${itemId}`
-    );
+    const { data } = await axios.get(`http://localhost:5003/${itemId}`);
     const item = data.data.data;
     return item;
   } catch (err) {

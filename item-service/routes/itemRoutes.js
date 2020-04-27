@@ -11,6 +11,8 @@ const {
   deleteItem,
 } = require('../controllers/itemController');
 
+const { requireLogin, requireAdmin } = require('../middlewares/require');
+
 const router = new Router();
 
 router.get('/', getItems);
@@ -20,9 +22,8 @@ router.get('/:id', getItem);
 router.get('/:id/pictures', getItemAndPictures);
 router.get('/:id/category&pictures', getItemCategoryAndPictures);
 
-// protected and has to be admin
-router.post('/', createItem);
-router.patch('/:id', updateItem);
-router.delete('/:id', deleteItem);
+router.post('/', requireLogin, requireAdmin, createItem);
+router.patch('/:id', requireLogin, requireAdmin, updateItem);
+router.delete('/:id', requireLogin, requireAdmin, deleteItem);
 
 module.exports = router;

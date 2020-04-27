@@ -5,6 +5,20 @@ const { promisify } = require('util');
 const { sendSuccessResponse } = require('../utils/response');
 const { signJwtToken, verifyJwtToken } = require('../utils/jwt');
 
+exports.getUser = async (ctx) => {
+  const { id } = ctx.params;
+
+  const user = await models.User.findOne({
+    where: { id },
+    attributes: ['id', 'username', 'email', 'roleId'],
+  });
+  if (!user) {
+    ctx.throw(401, 'User does not exist anymore!');
+  }
+
+  sendSuccessResponse(ctx, user);
+};
+
 exports.signup = async (ctx) => {
   const { username, email, password } = ctx.request.body;
   let user;
@@ -75,7 +89,7 @@ exports.user = async (ctx) => {
 
   const existingUser = await models.User.findByPk(user.id);
   if (!existingUser) {
-    ctx.throw(401, 'Use does not exist anymore!');
+    ctx.throw(401, 'User does not exist anymore!');
   }
 
   sendSuccessResponse(ctx, user);

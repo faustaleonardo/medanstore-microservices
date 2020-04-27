@@ -25,19 +25,14 @@ const acceptedFields = [
 
 const convertToArray = (data) => (data instanceof Array ? [...data] : [data]);
 
-// CHECK LATER
 const getPicturesAssociated = async ({ id }) => {
-  const { data } = await axios.get(
-    `http://35.185.178.158/picture-service/items/${id}`
-  );
+  const { data } = await axios.get(`http://localhost:5004/items/${id}`);
   const pictures = data.data.data;
   return pictures;
 };
 
 const getCategoryAssociated = async ({ id }) => {
-  const { data } = await axios.get(
-    `http://35.185.178.158/category-service/${id}`
-  );
+  const { data } = await axios.get(`http://localhost:5002/categories/${id}`);
   const category = data.data.data;
   return category;
 };

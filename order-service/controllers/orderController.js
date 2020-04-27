@@ -7,12 +7,6 @@ const { filterFields } = require('../utils/filter');
 
 const acceptedFields = ['items'];
 
-// PENDING. For now use hard coded. Later change
-const getAuthUserId = async () => {
-  return 1;
-};
-
-// CHECK LATER
 const getItemAssociated = async (itemId) => {
   try {
     const { data } = await axios.get(
@@ -26,14 +20,14 @@ const getItemAssociated = async (itemId) => {
 };
 
 exports.getOrders = async (ctx) => {
-  const userId = await getAuthUserId();
+  const userId = ctx.state.user.id;
 
   const orders = await models.Order.findAll({ where: { userId } });
   sendSuccessResponse(ctx, orders);
 };
 
 exports.getOrdersAndItems = async (ctx) => {
-  const userId = await getAuthUserId();
+  const userId = ctx.state.user.id;
   const orderId = ctx.params.orderId;
 
   const orders = await models.Order.findAll({
@@ -64,7 +58,7 @@ exports.getOrder = async (ctx) => {
 exports.createOrder = async (ctx) => {
   const filteredBody = filterFields(ctx.request.body, acceptedFields);
 
-  const userId = await getAuthUserId();
+  const userId = ctx.status.user.id;
   const orderId = uuidv4();
 
   const data = [];

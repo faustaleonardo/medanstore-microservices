@@ -8,13 +8,20 @@ const {
   deletePictures,
 } = require('../controllers/pictureController');
 
+const { requireLogin, requireAdmin } = require('../middlewares/require');
+
 const router = new Router();
 
 router.get('/items/:id', getPictures);
 
-// protected and has to be admin
-router.post('/items/:id', upload.array('images'), createPicture);
-router.delete('/items/:id', deletePictures);
-router.delete('/:id', deletePicture);
+router.post(
+  '/items/:id',
+  requireLogin,
+  requireAdmin,
+  upload.array('images'),
+  createPicture
+);
+router.delete('/items/:id', requireLogin, requireAdmin, deletePictures);
+router.delete('/:id', requireLogin, requireAdmin, deletePicture);
 
 module.exports = router;
