@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-web
+  annotations:
+    konghq.com/strip-path: 'false'
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web-cluster-ip-service
+              servicePort: 3000
