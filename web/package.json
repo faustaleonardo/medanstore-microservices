@@ -20,8 +20,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "gzip build/static/js/*.js && gzip build/static/css/*.css",
-    "analyze": "source-map-explorer 'build/static/js/*.gz'"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
