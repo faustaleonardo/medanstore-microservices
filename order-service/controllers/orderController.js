@@ -16,7 +16,7 @@ const getAuthUserId = async () => {
 const getItemAssociated = async (itemId) => {
   try {
     const { data } = await axios.get(
-      `http://35.240.176.80/item-service/${itemId}`
+      `http://35.185.178.158/item-service/${itemId}`
     );
     const item = data.data.data;
     return item;

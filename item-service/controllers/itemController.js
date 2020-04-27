@@ -28,7 +28,7 @@ const convertToArray = (data) => (data instanceof Array ? [...data] : [data]);
 // CHECK LATER
 const getPicturesAssociated = async ({ id }) => {
   const { data } = await axios.get(
-    `http://35.240.176.80/picture-service/items/${id}`
+    `http://35.185.178.158/picture-service/items/${id}`
   );
   const pictures = data.data.data;
   return pictures;
@@ -36,7 +36,7 @@ const getPicturesAssociated = async ({ id }) => {
 
 const getCategoryAssociated = async ({ id }) => {
   const { data } = await axios.get(
-    `http://35.240.176.80/category-service/${id}`
+    `http://35.185.178.158/category-service/${id}`
   );
   const category = data.data.data;
   return category;

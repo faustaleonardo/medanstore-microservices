@@ -1,0 +1,9 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: ratelimit-by-ip
+config:
+  hour: 1000
+  limit_by: ip
+  policy: local
+plugin: rate-limiting

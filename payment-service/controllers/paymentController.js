@@ -22,11 +22,14 @@ const getAuthUserId = () => {
 // CHECK LATER
 const sendEmail = async (user, orderId, url) => {
   // PENDING. Hard coded, later change.
-  await axios.post('http://35.240.176.80/email-service/payment-reminder/send', {
-    user,
-    orderId,
-    url,
-  });
+  await axios.post(
+    'http://35.185.178.158/email-service/payment-reminder/send',
+    {
+      user,
+      orderId,
+      url,
+    }
+  );
 };
 
 exports.getPayments = async (ctx) => {

@@ -4,6 +4,7 @@ metadata:
   name: ingress-web
   annotations:
     konghq.com/strip-path: 'false'
+    konghq.com/plugins: ratelimit-by-ip
 spec:
   rules:
     - http:
