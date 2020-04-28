@@ -8,16 +8,19 @@ import formatDate from '../../utils/formatDate';
 import formatCurrency from '../../utils/formatCurrency';
 
 import WarningModal from '../partials/WarningModal';
+import Loader from '../partials/Loader';
 
 const Order = () => {
   const [payments, setPayments] = useState([]);
   const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState(null);
   const [id, setId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { auth } = useContext(AuthContext);
 
   const cancelPayment = async (orderId) => {
+    setLoading(true);
     await axios.patch(
       `/payment-service/${orderId}`,
       { active: false },
@@ -27,9 +30,11 @@ const Order = () => {
         },
       }
     );
+    setLoading(false);
   };
 
   const handleStripeToken = async (orderId, token) => {
+    setLoading(true);
     await axios.patch(
       `payment-service/${orderId}/stripe`,
       {
@@ -41,6 +46,7 @@ const Order = () => {
         },
       }
     );
+    setLoading(false);
     window.location.reload();
   };
 
@@ -247,6 +253,9 @@ const Order = () => {
   if (auth === false) return <Redirect to="/login" />;
 
   if (!payments.length || nextPage === null) return null;
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Fragment>
