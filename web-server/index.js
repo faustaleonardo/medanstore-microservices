@@ -15,7 +15,7 @@ const root = require('path').join(__dirname, 'client', 'build');
 app.use(serve(root));
 app.use(async (ctx) => {
   let { url } = ctx.request;
-  url = url.split('/')[1];
+  url = url.split('/')[1].split('?')[0];
 
   if (urls.includes(url)) {
     await send(ctx, `/index.html`, {
