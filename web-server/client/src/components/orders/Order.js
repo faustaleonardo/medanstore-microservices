@@ -46,8 +46,8 @@ const Order = () => {
         },
       }
     );
-    setLoading(false);
     window.location.reload();
+    setLoading(false);
   };
 
   useEffect(() => {
