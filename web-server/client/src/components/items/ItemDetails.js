@@ -15,6 +15,11 @@ const ItemDetails = () => {
 
   const { id } = useParams();
 
+  const handleAddCart = (item) => {
+    if (auth === false) return history.push('/login');
+    addCart(item, 'add');
+  };
+
   useEffect(() => {
     const fetchItem = async () => {
       let response = await axios.get(`/item-service/${id}/categoryandpictures`);
@@ -37,7 +42,7 @@ const ItemDetails = () => {
           <h1 className="text-success mb-5">{formatCurrency(item.price)}</h1>
           <button
             className="btn btn-success"
-            onClick={() => addCart(item, 'add')}
+            onClick={() => handleAddCart(item)}
           >
             Add to cart
           </button>
