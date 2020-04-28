@@ -110,7 +110,7 @@ const Checkout = () => {
     if (courier) setCourier(null);
   };
 
-  const handleFinishOder = async () => {
+  const handleFinishOrder = async () => {
     let response, data;
     try {
       setLoading(true);
@@ -123,6 +123,7 @@ const Checkout = () => {
       data = {
         items,
       };
+
       response = await axios.post('/order-service/', data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('jwt')}`,
@@ -308,7 +309,7 @@ const Checkout = () => {
             <button
               type="button"
               className="btn btn-success"
-              onClick={() => handleFinishOder()}
+              onClick={() => handleFinishOrder()}
             >
               Finish Order
             </button>

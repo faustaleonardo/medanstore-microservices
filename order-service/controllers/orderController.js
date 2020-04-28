@@ -58,7 +58,7 @@ exports.getOrder = async (ctx) => {
 exports.createOrder = async (ctx) => {
   const filteredBody = filterFields(ctx.request.body, acceptedFields);
 
-  const userId = ctx.status.user.id;
+  const userId = ctx.state.user.id;
   const orderId = uuidv4();
 
   const data = [];
