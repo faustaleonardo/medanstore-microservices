@@ -21,8 +21,17 @@ export const AuthProvider = ({ children }) => {
     const jwt = localStorage.getItem('jwt');
     if (!jwt) payload = false;
     else {
-      const response = await axios.get('/user-service/user');
-      payload = response.data.data.data;
+      try {
+        const response = await axios.get('/user-service/user', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          },
+        });
+        const user = response.data.data.data;
+        payload = user;
+      } catch (err) {
+        payload = false;
+      }
     }
 
     dispatch({ type: 'FETCH_USER', payload });
