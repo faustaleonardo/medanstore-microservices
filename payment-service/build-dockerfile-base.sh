@@ -1,0 +1,1 @@
+docker build -t medanstore-payment-base -f ./Dockerfile-base .

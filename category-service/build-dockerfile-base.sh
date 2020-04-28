@@ -1,0 +1,1 @@
+docker build -t medanstore-category-base -f ./Dockerfile-base .

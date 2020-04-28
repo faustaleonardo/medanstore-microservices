@@ -1,0 +1,1 @@
+docker build -t medanstore-item-base -f ./Dockerfile-base .

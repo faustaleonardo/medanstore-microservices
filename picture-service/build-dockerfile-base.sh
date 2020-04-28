@@ -1,0 +1,1 @@
+docker build -t medanstore-picture-base -f ./Dockerfile-base .

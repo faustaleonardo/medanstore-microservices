@@ -1,0 +1,1 @@
+docker build -t medanstore-voucher-base -f ./Dockerfile-base .

@@ -1,0 +1,1 @@
+docker build -t medanstore-shipping-base -f ./Dockerfile-base .

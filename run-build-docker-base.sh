@@ -1,0 +1,10 @@
+./category-service/build-dockerfile-base.sh
+./email-service/build-dockerfile-base.sh
+./item-service/build-dockerfile-base.sh
+./order-service/build-dockerfile-base.sh
+./payment-service/build-dockerfile-base.sh
+./picture-service/build-dockerfile-base.sh
+./shipping-service/build-dockerfile-base.sh
+./user-service/build-dockerfile-base.sh
+./voucher-service/build-dockerfile-base.sh
+./web-server/build-dockerfile-base.sh
