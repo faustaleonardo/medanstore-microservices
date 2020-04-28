@@ -27,7 +27,7 @@ const convertToArray = (data) => (data instanceof Array ? [...data] : [data]);
 
 const getPicturesAssociated = async ({ id }) => {
   const { data } = await axios.get(
-    `http://35.185.178.158/picture-service/items/${id}`
+    `https://medanstore.xyz/picture-service/items/${id}`
   );
   const pictures = data.data.data;
   return pictures;
@@ -35,7 +35,7 @@ const getPicturesAssociated = async ({ id }) => {
 
 const getCategoryAssociated = async ({ id }) => {
   const { data } = await axios.get(
-    `http://35.185.178.158/category-service/categories/${id}`
+    `https://medanstore.xyz/category-service/categories/${id}`
   );
   const category = data.data.data;
   return category;

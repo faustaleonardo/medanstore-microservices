@@ -12,7 +12,7 @@ const S3 = new AWS.S3({
 const getItemAssociated = async (itemId) => {
   try {
     const { data } = await axios.get(
-      `http://35.185.178.158/item-service/${itemId}`
+      `https://medanstore.xyz/item-service/${itemId}`
     );
     const item = data.data.data;
     return item;

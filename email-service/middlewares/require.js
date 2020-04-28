@@ -16,7 +16,7 @@ exports.requireLogin = async (ctx, next) => {
   // get to know whether user is still registered
   try {
     const response = await axios.get(
-      `http://35.185.178.158/user-service/users/${user.id}`
+      `https://medanstore.xyz/user-service/users/${user.id}`
     );
     const existingUser = response.data.data.data;
 
