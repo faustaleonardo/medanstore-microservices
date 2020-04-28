@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory, useParams, Redirect } from 'react-router-dom';
-import axios from '../axios';
+import axios from 'axios';
 
 import { CategoryContext } from '../../../context/categories/categoryState';
 import renderWarningAlert from '../../../utils/renderWarningAlert';

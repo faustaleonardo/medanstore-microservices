@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useState, useContext, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import axios from '../axios';
+import axios from 'axios';
 
 import { ItemContext } from '../../../context/items/itemState';
 import { AuthContext } from '../../../context/auth/authState';
