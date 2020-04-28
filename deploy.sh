@@ -58,3 +58,4 @@ kubectl set image deployments/picture-service-deployment picture-service=faustal
 kubectl set image deployments/shipping-service-deployment shipping-service=faustaleonardo/medanstore-shipping-service:$SHA
 kubectl set image deployments/voucher-service-deployment voucher-service=faustaleonardo/medanstore-voucher-service:$SHA
 kubectl set image deployments/web-deployment web=faustaleonardo/medanstore-web:$SHA
+
