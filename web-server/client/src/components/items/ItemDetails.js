@@ -17,7 +17,7 @@ const ItemDetails = () => {
 
   useEffect(() => {
     const fetchItem = async () => {
-      let response = await axios.get(`/item-service/${id}/category&pictures`);
+      let response = await axios.get(`/item-service/${id}/categoryandpictures`);
       const result = response.data.data.data;
       setItem(result);
     };

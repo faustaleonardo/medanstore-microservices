@@ -20,7 +20,7 @@ router.get('/pictures', getItemsAndPictures);
 
 router.get('/:id', getItem);
 router.get('/:id/pictures', getItemAndPictures);
-router.get('/:id/category&pictures', getItemCategoryAndPictures);
+router.get('/:id/categoryandpictures', getItemCategoryAndPictures);
 
 router.post('/', requireLogin, requireAdmin, createItem);
 router.patch('/:id', requireLogin, requireAdmin, updateItem);

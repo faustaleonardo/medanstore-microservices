@@ -50,7 +50,9 @@ const ItemForm = ({ title, buttonName }) => {
 
     /** -----------start: fetching data for updating item--------- */
     const fetchItem = async () => {
-      const response = await axios.get(`/item-service/${id}/category&pictures`);
+      const response = await axios.get(
+        `/item-service/${id}/categoryandpictures`
+      );
       const item = response.data.data.data;
 
       setName(item.name);
