@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { CartContext } from '../../context/carts/cartState';
+import { AuthContext } from '../../context/auth/authState';
 import formatCurrency from '../../utils/formatCurrency';
 
 import axios from 'axios';
@@ -11,6 +12,7 @@ import ItemCarousel from './ItemCarousel';
 
 const ItemDetails = () => {
   const { addCart } = useContext(CartContext);
+  const { auth } = useContext(AuthContext);
   const [item, setItem] = useState(null);
 
   const { id } = useParams();
