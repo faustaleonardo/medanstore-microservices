@@ -35,7 +35,7 @@ const getPicturesAssociated = async ({ id }) => {
 
 const getCategoryAssociated = async ({ id }) => {
   const { data } = await axios.get(
-    `https://medanstore.xyz/category-service/categories/${id}`
+    `https://medanstore.xyz/category-service/${id}`
   );
   const category = data.data.data;
   return category;
