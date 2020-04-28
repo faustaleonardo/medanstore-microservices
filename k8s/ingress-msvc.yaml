@@ -5,9 +5,56 @@ metadata:
   annotations:
     konghq.com/strip-path: 'true'
     konghq.com/plugins: ratelimit-by-ip
+    kubernetes.io/tls-acme: 'true'
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  tls:
+    - secretName: medanstore.xyz
+      hosts:
+        - medanstore.xyz
+        - www.medanstore.xyz
   rules:
-    - http:
+    - host: medanstore.xyz
+      http:
+        paths:
+          - path: /user-service
+            backend:
+              serviceName: user-service-cluster-ip-service
+              servicePort: 5001
+          - path: /category-service
+            backend:
+              serviceName: category-service-cluster-ip-service
+              servicePort: 5002
+          - path: /item-service
+            backend:
+              serviceName: item-service-cluster-ip-service
+              servicePort: 5003
+          - path: /picture-service
+            backend:
+              serviceName: picture-service-cluster-ip-service
+              servicePort: 5004
+          - path: /order-service
+            backend:
+              serviceName: order-service-cluster-ip-service
+              servicePort: 5005
+          - path: /payment-service
+            backend:
+              serviceName: payment-service-cluster-ip-service
+              servicePort: 5006
+          - path: /email-service
+            backend:
+              serviceName: email-service-cluster-ip-service
+              servicePort: 5007
+          - path: /shipping-service
+            backend:
+              serviceName: shipping-service-cluster-ip-service
+              servicePort: 5008
+          - path: /voucher-service
+            backend:
+              serviceName: voucher-service-cluster-ip-service
+              servicePort: 5009
+    - host: www.medanstore.xyz
+      http:
         paths:
           - path: /user-service
             backend:

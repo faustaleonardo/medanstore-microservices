@@ -5,9 +5,24 @@ metadata:
   annotations:
     konghq.com/strip-path: 'false'
     konghq.com/plugins: ratelimit-by-ip
+    kubernetes.io/tls-acme: 'true'
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  tls:
+    - secretName: medanstore.xyz
+      hosts:
+        - medanstore.xyz
+        - www.medanstore.xyz
   rules:
-    - http:
+    - host: medanstore.xyz
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web-cluster-ip-service
+              servicePort: 5050
+    - host: www.medanstore.xyz
+      http:
         paths:
           - path: /
             backend:
