@@ -13,8 +13,8 @@ const { requireLogin, requireAdmin } = require('../middlewares/require');
 
 const router = new Router();
 
-router.get('/', getVouchers);
-router.get('/:id', getVoucher);
+router.get('/', requireLogin, requireAdmin, getVouchers);
+router.get('/:id', requireLogin, requireAdmin, getVoucher);
 router.get('/code/:code', getVoucherByCode);
 
 router.post('/', requireLogin, requireAdmin, createVoucher);
