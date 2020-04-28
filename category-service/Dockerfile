@@ -1,4 +1,4 @@
-FROM medanstore-web-base
+FROM medanstore-category-base
 
 COPY . .
 
