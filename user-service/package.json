@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@koa/router": "^8.0.8",
-    "amqplib": "^0.5.5",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "faker": "^4.1.0",
