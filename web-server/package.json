@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-logger": "^3.2.1",
+    "koa-send": "^5.0.0",
+    "koa-static": "^5.0.0"
+  },
+  "name": "web-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
