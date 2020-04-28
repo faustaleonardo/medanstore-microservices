@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { CartContext } from '../../context/carts/cartState';
 import { AuthContext } from '../../context/auth/authState';
@@ -13,6 +13,7 @@ import ItemCarousel from './ItemCarousel';
 const ItemDetails = () => {
   const { addCart } = useContext(CartContext);
   const { auth } = useContext(AuthContext);
+  const history = useHistory();
   const [item, setItem] = useState(null);
 
   const { id } = useParams();
