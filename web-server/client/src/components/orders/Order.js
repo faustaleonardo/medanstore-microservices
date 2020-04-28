@@ -55,7 +55,7 @@ const Order = () => {
         const payments = response.data.data.data;
         for (const payment of payments) {
           const response = await axios.get(
-            `order-service/${payment.orderId}/items`,
+            `/order-service/${payment.orderId}/items`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('jwt')}`,

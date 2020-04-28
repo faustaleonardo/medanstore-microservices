@@ -27,7 +27,7 @@ const sendEmail = async (token, user, orderId, url) => {
 };
 
 exports.getPayments = async (ctx) => {
-  const userId = ctx.state.user;
+  const userId = ctx.state.user.id;
   const { page } = ctx.query;
 
   const payments = await models.Payment.findAll({
