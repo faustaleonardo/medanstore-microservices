@@ -17,7 +17,11 @@ export const VoucherProvider = ({ children }) => {
 
   // actions
   const getVouchers = async () => {
-    const response = await axios.get('/voucher-service/');
+    const response = await axios.get('/voucher-service/', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      },
+    });
     const vouchers = response.data.data.data;
 
     dispatch({ type: 'GET_VOUCHERS', payload: vouchers });
