@@ -12,4 +12,4 @@ spec:
           - path: /
             backend:
               serviceName: web-cluster-ip-service
-              servicePort: 80
+              servicePort: 5050
